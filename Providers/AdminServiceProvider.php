@@ -39,6 +39,9 @@ class AdminServiceProvider extends ServiceProvider
     {
         $this->registerConfig();
         $this->app->register(RouteServiceProvider::class);
+
+        // Setup config for User
+        \Config::set('auth.providers.users.model', \Modules\Admin\Entities\User::class);
     }
 
     /**
@@ -50,6 +53,7 @@ class AdminServiceProvider extends ServiceProvider
     {
         $this->publishes([
             // module_path($this->moduleName, 'Config/config.php') => config_path($this->moduleNameLower . '.php'),
+            module_path($this->moduleName, 'Config/voyager.php') => config_path('voyager.php'),
         ], 'config');
         $this->mergeConfigFrom(
             module_path($this->moduleName, 'Config/config.php'), $this->moduleNameLower

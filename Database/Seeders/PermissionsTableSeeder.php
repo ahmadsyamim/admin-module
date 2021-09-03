@@ -227,46 +227,6 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2021-07-28 20:50:38',
                 'updated_at' => '2021-07-28 20:50:38',
             ),
-            26 => 
-            array (
-                'id' => 32,
-                'key' => 'browse_blog_posts',
-                'table_name' => NULL,
-                'created_at' => '2021-07-30 14:08:21',
-                'updated_at' => '2021-07-30 14:08:21',
-            ),
-            27 => 
-            array (
-                'id' => 33,
-                'key' => 'read_blog_posts',
-                'table_name' => NULL,
-                'created_at' => '2021-07-30 14:08:21',
-                'updated_at' => '2021-07-30 14:08:21',
-            ),
-            28 => 
-            array (
-                'id' => 34,
-                'key' => 'edit_blog_posts',
-                'table_name' => NULL,
-                'created_at' => '2021-07-30 14:08:21',
-                'updated_at' => '2021-07-30 14:08:21',
-            ),
-            29 => 
-            array (
-                'id' => 35,
-                'key' => 'add_blog_posts',
-                'table_name' => NULL,
-                'created_at' => '2021-07-30 14:08:21',
-                'updated_at' => '2021-07-30 14:08:21',
-            ),
-            30 => 
-            array (
-                'id' => 36,
-                'key' => 'delete_blog_posts',
-                'table_name' => NULL,
-                'created_at' => '2021-07-30 14:08:21',
-                'updated_at' => '2021-07-30 14:08:21',
-            ),
             31 => 
             array (
                 'id' => 37,
@@ -346,46 +306,6 @@ class PermissionsTableSeeder extends Seeder
                 'table_name' => 'categories',
                 'created_at' => '2021-07-30 14:08:21',
                 'updated_at' => '2021-07-30 14:08:21',
-            ),
-            41 => 
-            array (
-                'id' => 47,
-                'key' => 'browse_pages',
-                'table_name' => NULL,
-                'created_at' => '2021-07-30 14:08:33',
-                'updated_at' => '2021-07-30 14:08:33',
-            ),
-            42 => 
-            array (
-                'id' => 48,
-                'key' => 'read_pages',
-                'table_name' => NULL,
-                'created_at' => '2021-07-30 14:08:33',
-                'updated_at' => '2021-07-30 14:08:33',
-            ),
-            43 => 
-            array (
-                'id' => 49,
-                'key' => 'edit_pages',
-                'table_name' => NULL,
-                'created_at' => '2021-07-30 14:08:33',
-                'updated_at' => '2021-07-30 14:08:33',
-            ),
-            44 => 
-            array (
-                'id' => 50,
-                'key' => 'add_pages',
-                'table_name' => NULL,
-                'created_at' => '2021-07-30 14:08:33',
-                'updated_at' => '2021-07-30 14:08:33',
-            ),
-            45 => 
-            array (
-                'id' => 51,
-                'key' => 'delete_pages',
-                'table_name' => NULL,
-                'created_at' => '2021-07-30 14:08:33',
-                'updated_at' => '2021-07-30 14:08:33',
             ),
             46 => 
             array (

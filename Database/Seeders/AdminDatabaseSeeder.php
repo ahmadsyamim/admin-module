@@ -25,6 +25,7 @@ class AdminDatabaseSeeder extends Seeder
             PermissionsTableSeeder::class,
             PermissionRoleTableSeeder::class,
             SettingsTableSeeder::class,
+            UsersTableSeeder::class,
             BlogPostsTableSeeder::class,
             PagesTableSeeder::class,
         ]);
