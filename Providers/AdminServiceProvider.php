@@ -49,7 +49,7 @@ class AdminServiceProvider extends ServiceProvider
     protected function registerConfig()
     {
         $this->publishes([
-            module_path($this->moduleName, 'Config/config.php') => config_path($this->moduleNameLower . '.php'),
+            // module_path($this->moduleName, 'Config/config.php') => config_path($this->moduleNameLower . '.php'),
         ], 'config');
         $this->mergeConfigFrom(
             module_path($this->moduleName, 'Config/config.php'), $this->moduleNameLower
@@ -67,8 +67,15 @@ class AdminServiceProvider extends ServiceProvider
 
         $sourcePath = module_path($this->moduleName, 'Resources/views');
 
+        $viewPathFrontend = resource_path('views/vendor/voyager-frontend');
+        $sourcePathFrontend = module_path($this->moduleName, 'Resources/views/vendor/voyager-frontend');
+
+        $targetAssetPathFrontend = public_path('/');
+        $sourceAssetPathFrontend = module_path($this->moduleName, 'Resources/assets/frontend');
+
         $this->publishes([
-            $sourcePath => $viewPath
+            $sourcePathFrontend => $viewPathFrontend,
+            $sourceAssetPathFrontend => $targetAssetPathFrontend,
         ], ['views', $this->moduleNameLower . '-module-views']);
 
         $this->loadViewsFrom(array_merge($this->getPublishableViewPaths(), [$sourcePath]), $this->moduleNameLower);
