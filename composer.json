@@ -12,7 +12,6 @@
         "laravel": {
             "providers": [],
             "aliases": {
-
             }
         }
     },
@@ -24,5 +23,10 @@
     "require": {
         "tcg/voyager": "^1.5",
         "pvtl/voyager-frontend": "^1.0"
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "@php artisan vendor:publish --provider=Modules\\Admin\\Providers\\AdminServiceProvider"
+        ]
     }
 }
