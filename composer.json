@@ -1,0 +1,26 @@
+{
+    "name": "ahmadsyamim/admin-module",
+    "description": "",
+    "authors": [
+        {
+            "name": "Ahmad Syamim",
+            "email": "ahmad.syamim@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Admin\\": ""
+        }
+    },
+    "require": {
+        "tcg/voyager": "^1.5"
+    }
+}
