@@ -22,16 +22,16 @@ Route::group(['prefix' => \Config::get('admin.route_prefix')], function () {
 });
 
 if (env('APP_SITE', false) || (Schema::hasTable('settings') && setting('site.enable'))) {
-    $accountController = '\App\Http\Controllers\VoyagerFrontend\AccountController';
+    $accountController = '\Modules\Admin\Http\Controllers\VoyagerFrontend\AccountController';
     $searchController = '\Pvtl\VoyagerFrontend\Http\Controllers\SearchController';
     
     /**
      * Authentication
      */
     Route::group(['middleware' => ['web']], function () use ($accountController) {
-        Route::group(['namespace' => 'App\Http\Controllers'], function () {
-            Auth::routes();
-        });
+        Auth::routes();
+        // Route::group([], function () {
+        // });
     
         Route::group(['middleware' => 'auth', 'as' => 'voyager-frontend.account'], function () use ($accountController) {
             Route::get('/account', "$accountController@index");

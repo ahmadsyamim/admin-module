@@ -77,6 +77,9 @@ class AdminServiceProvider extends ServiceProvider
         $targetAssetPathFrontend = public_path('/');
         $sourceAssetPathFrontend = module_path($this->moduleName, 'Resources/assets/frontend');
 
+        $viewPathAuth = resource_path('views/vendor/voyager-frontend');
+        $sourcePathAuth = module_path($this->moduleName, 'Resources/views/vendor/voyager-frontend');
+
         $this->publishes([
             $sourcePathFrontend => $viewPathFrontend,
             $sourceAssetPathFrontend => $targetAssetPathFrontend,
