@@ -1,6 +1,7 @@
 {
     "name": "ahmadsyamim/admin-module",
     "description": "",
+    "type": "laravel-module",
     "authors": [
         {
             "name": "Ahmad Syamim",
