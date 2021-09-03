@@ -84,12 +84,12 @@ class DataTypesTableSeeder extends Seeder
                 'model_name' => 'Pvtl\\VoyagerFrontend\\BlogPost',
                 'policy_name' => NULL,
                 'controller' => '\\Pvtl\\VoyagerFrontend\\Http\\Controllers\\PostController',
-                'description' => '',
+                'description' => NULL,
                 'generate_permissions' => 1,
                 'server_side' => 0,
-                'details' => NULL,
+                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"desc","default_search_key":null,"scope":null}',
                 'created_at' => '2021-07-30 14:08:20',
-                'updated_at' => '2021-08-27 14:59:28',
+                'updated_at' => '2021-09-03 13:21:58',
             ),
             4 => 
             array (
@@ -102,12 +102,12 @@ class DataTypesTableSeeder extends Seeder
                 'model_name' => 'Pvtl\\VoyagerBlog\\Category',
                 'policy_name' => NULL,
                 'controller' => '\\TCG\\Voyager\\Http\\Controllers\\VoyagerBaseController',
-                'description' => '',
+                'description' => NULL,
                 'generate_permissions' => 1,
                 'server_side' => 0,
-                'details' => NULL,
+                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"desc","default_search_key":null,"scope":null}',
                 'created_at' => '2021-07-30 14:08:21',
-                'updated_at' => '2021-07-30 14:08:21',
+                'updated_at' => '2021-09-03 13:22:10',
             ),
             5 => 
             array (
