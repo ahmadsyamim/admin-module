@@ -25,6 +25,8 @@ class AdminDatabaseSeeder extends Seeder
             PermissionsTableSeeder::class,
             PermissionRoleTableSeeder::class,
             SettingsTableSeeder::class,
+            BlogPostsTableSeeder::class,
+            PagesTableSeeder::class,
         ]);
     }
 }

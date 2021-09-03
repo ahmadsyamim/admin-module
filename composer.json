@@ -22,6 +22,7 @@
         }
     },
     "require": {
-        "tcg/voyager": "^1.5"
+        "tcg/voyager": "^1.5",
+        "pvtl/voyager-frontend": "^1.0"
     }
 }
