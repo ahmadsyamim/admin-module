@@ -42,6 +42,10 @@ class AdminServiceProvider extends ServiceProvider
 
         // Setup config for User
         \Config::set('auth.providers.users.model', \Modules\Admin\Entities\User::class);
+
+        $this->commands([
+            \Modules\Admin\Console\AdminInstall::class,
+        ]);
     }
 
     /**
