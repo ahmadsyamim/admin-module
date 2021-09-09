@@ -16,7 +16,7 @@ class AdminInstall extends Command
      *
      * @var string
      */
-    protected $signature = 'admin:install';
+    protected $signature = 'admin:install {--dumpautoload}';
 
     /**
      * The console command description.
@@ -44,6 +44,7 @@ class AdminInstall extends Command
     {
         //
         $force = false;
+        $dumpautoload = $this->option('dumpautoload');
         if (!file_exists(base_path('.env'))) {
             $force = true;
             \File::copy('.env.example', '.env');
@@ -70,6 +71,8 @@ class AdminInstall extends Command
                     $this->putEnvFile($key, $input, app()->environmentFilePath());
                 }
             }
+        } else if (file_exists(base_path('.env')) && $dumpautoload) {
+            return 0;
         } else {
             // ask for force re-install?
             $force = $this->ask('This action will refresh/re-install whole database. Do you want to continue?', false);
