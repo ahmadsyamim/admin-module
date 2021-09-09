@@ -28,6 +28,7 @@ class AdminDatabaseSeeder extends Seeder
             UsersTableSeeder::class,
             BlogPostsTableSeeder::class,
             PagesTableSeeder::class,
+            ModulesTableSeeder::class,
         ]);
     }
 }
