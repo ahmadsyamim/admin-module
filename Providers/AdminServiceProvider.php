@@ -4,6 +4,7 @@ namespace Modules\Admin\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use TCG\Voyager\Facades\Voyager;
 
 class AdminServiceProvider extends ServiceProvider
 {
@@ -37,6 +38,7 @@ class AdminServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        Voyager::addAction(\Modules\Admin\Http\Actions\Modules\InstallAction::class);
         $this->registerConfig();
         $this->app->register(RouteServiceProvider::class);
 
