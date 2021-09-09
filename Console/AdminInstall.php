@@ -45,7 +45,7 @@ class AdminInstall extends Command
         //
         $force = false;
         $dumpautoload = $this->option('dumpautoload');
-        if (!file_exists(base_path('.env'))) {
+        if (!$dumpautoload) {
             $force = true;
             \File::copy('.env.example', '.env');
             // ask user to setup env
