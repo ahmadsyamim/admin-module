@@ -42,10 +42,13 @@ class AdminInstall extends Command
     {
         //
         Artisan::call('vendor:publish', ['--force' => true, '--provider' => 'Modules\Admin\Providers\AdminServiceProvider']);
+        echo(Artisan::output());
         Artisan::call('migrate:fresh --seed');
+        echo(Artisan::output());
         Artisan::call('module:migrate');
+        echo(Artisan::output());
         Artisan::call('module:seed');
-        dump(Artisan::output());
+        echo(Artisan::output());
     }
 
     /**
