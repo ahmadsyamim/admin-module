@@ -18,11 +18,11 @@ class InstallAction extends AbstractAction
     public function getTitle($actionParams = ['type'=>false, 'id'=>false])
     {
         if ($actionParams['type']) {
-            if ($actionParams['id']) {
+            if (isset($actionParams['id']) && $actionParams['id']) {
                 $id = $actionParams['id'];
                 $module = Module::find($id);
                 $moduleInfo = \Module::find($module->slug);
-                if ($moduleInfo->isStatus(true)) {
+                if ($moduleInfo && $moduleInfo->isStatus(true)) {
                     return 'Disable';
                 } else {
                     return 'Enable';        

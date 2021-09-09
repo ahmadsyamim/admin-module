@@ -122,10 +122,8 @@ if (\Illuminate\Support\Str::startsWith(Auth::user()->avatar, 'http://') || \Ill
 
 <script>
     //window.jwt_url = '{{url("auth/me")}}';
-    window.jwt_token = '{{ auth()->user()->getJWT() }}';
 </script>
-<script src="{{ asset('js/app.js') }}"></script>
-{{-- <script type="text/javascript" src="{{ voyager_asset('js/app.js') }}"></script> --}}
+<script type="text/javascript" src="{{ voyager_asset('js/app.js') }}"></script>
 
 <script>
     @if(Session::has('alerts'))

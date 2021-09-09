@@ -1,6 +1,9 @@
 @php 
 $except = $except ?? array();
-$actionParams = $actionParams ?? array('type'=>false);
+$actionParams = $actionParams ?? array('type'=>false, 'id'=>false);
+if ($data && $data->getKey()) {
+    $actionParams['id'] = $data->getKey();
+}
 @endphp
 @if($data && !in_array($action->getPolicy(), $except) && !method_exists($action, 'massAction'))
     @php
@@ -14,6 +17,9 @@ $actionParams = $actionParams ?? array('type'=>false);
         </a>
     @endcan
 @elseif (isset($dataType) && method_exists($action, 'massAction'))
+    @if (!$action->isBulk() && (isset($actionParams['type']) && !$actionParams['type']))
+
+    @else 
     <form method="post" action="{{ route('voyager.'.$dataType->slug.'.action') }}" style="display:inline">
         {{ csrf_field() }}
         <button type="submit" {!! $action->convertAttributesToHtml($actionParams) !!}><i class="{{ $action->getIcon() }}"></i>  {{ $action->getTitle($actionParams) }}</button>
@@ -24,4 +30,5 @@ $actionParams = $actionParams ?? array('type'=>false);
         <input type="hidden" name="ids" value="" class="selected_ids">
         @endif
     </form>
+    @endif
 @endif

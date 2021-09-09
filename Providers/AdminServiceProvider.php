@@ -38,6 +38,9 @@ class AdminServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        if (!file_exists(base_path('.env')) && !file_exists(base_path('database/database.sqlite'))) {
+            \File::put('database/database.sqlite','');
+        }
         Voyager::addAction(\Modules\Admin\Http\Actions\Modules\InstallAction::class);
         $this->registerConfig();
         $this->app->register(RouteServiceProvider::class);
@@ -83,12 +86,13 @@ class AdminServiceProvider extends ServiceProvider
         $targetAssetPathFrontend = public_path('/');
         $sourceAssetPathFrontend = module_path($this->moduleName, 'Resources/assets/frontend');
 
-        $viewPathAuth = resource_path('views/vendor/voyager-frontend');
-        $sourcePathAuth = module_path($this->moduleName, 'Resources/views/vendor/voyager-frontend');
+        $viewPathVoyager = resource_path('views/vendor/voyager');
+        $sourcePathVoyager = module_path($this->moduleName, 'Resources/views/vendor/voyager');
 
         $this->publishes([
             $sourcePathFrontend => $viewPathFrontend,
             $sourceAssetPathFrontend => $targetAssetPathFrontend,
+            $sourcePathVoyager => $viewPathVoyager,
         ], ['views', $this->moduleNameLower . '-module-views']);
 
         $this->loadViewsFrom(array_merge($this->getPublishableViewPaths(), [$sourcePath]), $this->moduleNameLower);
