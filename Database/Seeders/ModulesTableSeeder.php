@@ -25,7 +25,7 @@ class ModulesTableSeeder extends Seeder
                 'title' => 'Theme',
                 'description' => 'Theme Manager',
                 'slug' => 'theme',
-                'url' => NULL,
+                'url' => 'ahmadsyamim/theme-module',
                 'status' => 0,
             ),
         ));

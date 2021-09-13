@@ -4,15 +4,17 @@ namespace Modules\Admin\Http\Actions\Modules;
 
 use Modules\Admin\Http\Actions\AbstractAction;
 use Modules\Admin\Entities\Module;
+use Illuminate\Support\Str;
 
 class InstallAction extends AbstractAction
-{  
+{
     public function __construct($dataType, $data)
     {
         $this->dataType = $dataType;
         $this->data = $data;
-        $this->isBulk=false;
-        $this->isSingle=true;
+        $this->data = $data;
+        $this->isBulk = false;
+        $this->isSingle = true;
     }
 
     public function getTitle($actionParams = ['type'=>false, 'id'=>false])
@@ -24,7 +26,7 @@ class InstallAction extends AbstractAction
                 $moduleInfo = \Module::find($module->slug);
                 if ($moduleInfo && $moduleInfo->isStatus(true)) {
                     return 'Disable';
-                } else {
+                } else if ($moduleInfo && !$moduleInfo->isStatus(true)) {
                     return 'Enable';        
                 }
             }
@@ -77,6 +79,14 @@ class InstallAction extends AbstractAction
             foreach ($ids as $id) {
                 $module = Module::find($id);
                 $moduleInfo = \Module::find($module->slug);
+                if (!$moduleInfo) {
+                    if ($module->url && ($this->isUrl($module->url))) {
+                        // if url, use url 
+                    } else {
+                        // not url, try to module:install @ composer require
+                        \Artisan::call("module:install", ['name' => $module->url]);
+                    }
+                }
                 if ($moduleInfo) {
                     if ($moduleInfo->isStatus(true)) {
                         \Artisan::call("module:migrate-rollback", ['module' => $moduleInfo->getName()]);
@@ -86,10 +96,13 @@ class InstallAction extends AbstractAction
                         $moduleInfo->enable();
                     }
                     \Artisan::call("cache:clear");
-                }
+                } 
             }
         }
         return redirect($comingFrom);
     }
 
+    private function isUrl($url){
+        return preg_match('%^(?:(?:https?|ftp)://)(?:\S+(?::\S*)?@|\d{1,3}(?:\.\d{1,3}){3}|(?:(?:[a-z\d\x{00a1}-\x{ffff}]+-?)*[a-z\d\x{00a1}-\x{ffff}]+)(?:\.(?:[a-z\d\x{00a1}-\x{ffff}]+-?)*[a-z\d\x{00a1}-\x{ffff}]+)*(?:\.[a-z\x{00a1}-\x{ffff}]{2,6}))(?::\d+)?(?:[^\s]*)?$%iu', $url);
+    }
 }
