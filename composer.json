@@ -22,7 +22,8 @@
     },
     "require": {
         "tcg/voyager": "^1.5",
-        "pvtl/voyager-frontend": "^1.0"
+        "pvtl/voyager-frontend": "^1.0",
+        "titasgailius/terminal": "^1.0"
     },
     "scripts": {
         "post-autoload-dump": [
