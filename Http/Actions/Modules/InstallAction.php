@@ -94,6 +94,13 @@ class InstallAction extends AbstractAction
                     } else {
                         \Artisan::call("module:migrate", ['module' => $moduleInfo->getName()]);
                         $moduleInfo->enable();
+
+                        // Run postEnable if available
+                        $moduleServiceProvider = "Modules\\{$moduleInfo->getName()}\Providers\ModuleServiceProvider";
+                        if ((int)method_exists($moduleServiceProvider, 'postEnable')) {
+                            $moduleService = new $moduleServiceProvider($moduleInfo->getName());
+                            $moduleService->postEnable();
+                        }
                     }
                     \Artisan::call("cache:clear");
                 } 
