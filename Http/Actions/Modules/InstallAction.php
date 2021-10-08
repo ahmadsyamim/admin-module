@@ -30,7 +30,10 @@ class InstallAction extends AbstractAction
                     return 'Enable';        
                 }
             }
-            return 'Install';
+            if ($module->isValid()) {
+                return 'Install';
+            }
+            return 'Invalid Module';
         }
         return 'Bulk Install';
     }
