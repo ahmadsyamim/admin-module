@@ -89,6 +89,10 @@ class AdminInstall extends Command
         echo(Artisan::output());
         Artisan::call("config:clear");
         Artisan::call("cache:clear");
+        Artisan::call("key:generate");
+        echo(Artisan::output());
+        Artisan::call("storage:link");
+        echo(Artisan::output());
 
         if (app()->environmentFilePath() != base_path('.env') && file_exists(base_path('.env.example.default'))) {
             \File::move('.env.example.default', '.env.example');
