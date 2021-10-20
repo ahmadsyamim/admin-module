@@ -96,6 +96,11 @@ class AdminServiceProvider extends ServiceProvider
         ], ['views', $this->moduleNameLower . '-module-views']);
 
         $this->loadViewsFrom(array_merge($this->getPublishableViewPaths(), [$sourcePath]), $this->moduleNameLower);
+
+        //Storage assets
+        $sourceImg = module_path($this->moduleName, 'Resources/storage/app/public');
+        $targetImg = storage_path('app/public');
+        \File::copyDirectory($sourceImg, $targetImg);
     }
 
     /**
