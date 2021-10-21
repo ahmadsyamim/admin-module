@@ -66,7 +66,7 @@ if (env('APP_SITE', false) || (Schema::hasTable('settings') && setting('site.ena
         ->middleware(['web'])
         ->name('voyager-frontend.search');
 
-} else if (env('APP_ADMIN', true) && (Schema::hasTable('pages'))) {
+} else if (env('APP_ADMIN', true) && (Schema::hasTable('pages') && setting('site.enable'))) {
 
     // Which Page Controller shall we use to display the page? Page Blocks or standard page?
     $pageController = '\Pvtl\VoyagerPages\Http\Controllers\PageController';
