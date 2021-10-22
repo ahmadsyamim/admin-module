@@ -94,6 +94,12 @@ if (env('APP_SITE', false) || (Schema::hasTable('settings') && setting('site.ena
             ->middleware('web')
             ->where('slug', '.+');
     }
+} else if (!setting('site.enable') && env('APP_ADMIN', true)) {
+    Route::get('/{slug?}', function () {
+        return redirect('admin');
+    })
+    ->middleware('web')
+    ->where('slug', '.+');
 }
 
 
