@@ -23,7 +23,8 @@
     "require": {
         "tcg/voyager": "^1.5",
         "pvtl/voyager-frontend": "^1.0",
-        "titasgailius/terminal": "^1.0"
+        "titasgailius/terminal": "^1.0",
+        "akaunting/laravel-money": "^1.2"
     },
     "scripts": {
         "post-autoload-dump": [
