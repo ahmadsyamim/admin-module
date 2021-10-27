@@ -10,7 +10,7 @@ class CurrencyFormField extends AbstractHandler
 
     public function createContent($row, $dataType, $dataTypeContent, $options)
     {
-        return view('formfields.currency', [
+        return view('voyager::formfields.currency', [
             'row' => $row,
             'options' => $options,
             'dataType' => $dataType,
