@@ -58,7 +58,12 @@ class AdminInstall extends Command
                 'DB_DATABASE' => "laravel_admin",
                 'DB_USERNAME' => "root",
                 'DB_PASSWORD' => "",
+                'COMPOSER_HOME' => "",
             );
+
+            if ($this->is_linux()) {
+                $configs['COMPOSER_HOME'] = exec('which composer'); 
+            }
 
             if (app()->environmentFilePath() != base_path('.env')) {
                 \File::copy('.env.example', '.env.example.default');
@@ -132,10 +137,37 @@ class AdminInstall extends Command
 
         $escaped = preg_quote('='.env($key), '/');
 
-        file_put_contents($path, preg_replace(
-            "/^{$key}{$escaped}/m",
-            "{$key}={$value}",
-            file_get_contents($path)
-        ));
+        if (file_exists($path)) {
+            //Try to read the current content of .env
+            $current = file_get_contents($path);   
+        
+            //Store the key
+            $original = [];
+            if (preg_match("/^{$key}=(.+)$/m", $current, $original)) { 
+            //Write the original key to console
+                $this->info("Original {$key} key: $original[0]"); 
+        
+            //Overwrite with new key
+                $current = preg_replace("/^{$key}=.+$/m", "{$key}=$value", $current);
+        
+            } else {
+            //Append the key to the end of file
+                $current .= PHP_EOL."{$key}=$value";
+            }
+            file_put_contents($path, $current);
+        }
+
+        // if ($key =='DB_CONNECTION') {
+        //     file_get_contents($path);
+        // }
     }
+
+    public function checkExists( string $path_or_content )
+    {
+        $content =      @file_exists( $path_or_content )
+                ? file_get_contents( $path_or_content )
+                :                    $path_or_content;
+    }
+
+    public function is_linux() { return (DIRECTORY_SEPARATOR == '/') ? true : false; }
 }
