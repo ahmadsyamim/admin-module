@@ -144,22 +144,18 @@ class AdminInstall extends Command
             //Store the key
             $original = [];
             if (preg_match("/^{$key}=(.+)$/m", $current, $original)) { 
-            //Write the original key to console
+                //Write the original key to console
                 $this->info("Original {$key} key: $original[0]"); 
         
-            //Overwrite with new key
+                //Overwrite with new key
                 $current = preg_replace("/^{$key}=.+$/m", "{$key}=$value", $current);
         
             } else {
-            //Append the key to the end of file
+                //Append the key to the end of file
                 $current .= PHP_EOL."{$key}=$value";
             }
             file_put_contents($path, $current);
         }
-
-        // if ($key =='DB_CONNECTION') {
-        //     file_get_contents($path);
-        // }
     }
 
     public function checkExists( string $path_or_content )
