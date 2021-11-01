@@ -5,7 +5,7 @@ if ($data && $data->getKey()) {
     $actionParams['id'] = $data->getKey();
 }
 @endphp
-@if($data && !in_array($action->getPolicy(), $except) && !method_exists($action, 'massAction'))
+@if($data && $action->getTitle($actionParams) && !in_array($action->getPolicy(), $except) && !method_exists($action, 'massAction') && (method_exists($action, 'isSingle') && $action->isSingle() || !method_exists($action, 'isSingle')))
     @php
         // need to recreate object because policy might depend on record data
         $class = get_class($action);
@@ -16,7 +16,7 @@ if ($data && $data->getKey()) {
             <i class="{{ $action->getIcon() }}"></i> <span class="hidden-xs hidden-sm">{{ $action->getTitle($actionParams) }}</span>
         </a>
     @endcan
-@elseif (isset($dataType) && method_exists($action, 'massAction'))
+@elseif ($action->getTitle($actionParams) && isset($dataType) && method_exists($action, 'massAction'))
     @if (!$action->isBulk() && (isset($actionParams['type']) && !$actionParams['type']))
 
     @else 
