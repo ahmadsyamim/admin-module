@@ -61,7 +61,7 @@
                             </button>
                         </form>
                         @else
-                        <a href="{{ isset($item['route']) && Route::has($item['route']) ? route($item['route']) : (isset($item['route']) ? $item['route'] : '#') }}" {!! isset($item['target_blank']) && $item['target_blank'] ? 'target="_blank"' : '' !!}>
+                        <a href="{{ isset($item['route']) && Route::has($item['route']) ? route($item['route']) : (isset($item['route']) ? ($item['route'] == '/' ? url('/') : $item['route']) : '#') }}" {!! isset($item['target_blank']) && $item['target_blank'] ? 'target="_blank"' : '' !!}>
                             @if(isset($item['icon_class']) && !empty($item['icon_class']))
                             <i class="{!! $item['icon_class'] !!}"></i>
                             @endif
