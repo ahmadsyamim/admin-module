@@ -22,6 +22,15 @@ class ModulesTableSeeder extends Seeder
             0 => 
             array (
                 'id' => 1,
+                'title' => 'Admin',
+                'description' => 'Admin Manager',
+                'slug' => 'admin',
+                'url' => 'ahmadsyamim/admin-module',
+                'status' => 0,
+            ),
+            1 => 
+            array (
+                'id' => 2,
                 'title' => 'Theme',
                 'description' => 'Theme Manager',
                 'slug' => 'theme',
