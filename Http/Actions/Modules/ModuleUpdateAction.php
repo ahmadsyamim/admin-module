@@ -23,7 +23,7 @@ class ModuleUpdateAction extends AbstractAction
             if (isset($actionParams['id']) && $actionParams['id']) {
                 $id = $actionParams['id'];
                 $module = Module::find($id);
-                if ($module->sha && $module->sha != $module->current_sha) {
+                if (LaravelModule::find($module->title) && $module->sha && $module->sha != $module->current_sha) {                
                     return 'Update available';
                 }
             }
