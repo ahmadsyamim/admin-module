@@ -87,6 +87,7 @@ class ModuleUpdateAction extends AbstractAction
                     }
                     if ($success) {
                         $module->current_sha = $module->sha;
+                        $module->last_update_at = \Carbon\Carbon::now();
                         $module->save();
                     }
                 }                
