@@ -63,6 +63,19 @@ class AdminInstall extends Command
 
             if ($this->is_linux()) {
                 $configs['COMPOSER_HOME'] = exec('which composer'); 
+            } else {
+                $arr = array(
+                    "which composer",
+                    "where.exe composer"
+                );
+                $ch = false;
+                foreach ($arr as $v) {
+                    $ch = exec($v);
+                    if ($ch) {
+                        $configs['COMPOSER_HOME'] = addslashes($ch);
+                        break;
+                    }
+                }
             }
 
             if (app()->environmentFilePath() != base_path('.env')) {
