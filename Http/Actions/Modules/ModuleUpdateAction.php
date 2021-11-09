@@ -6,6 +6,7 @@ use Modules\Admin\Http\Actions\AbstractAction;
 use Modules\Admin\Entities\Module;
 use Illuminate\Support\Str;
 use Nwidart\Modules\Facades\Module as LaravelModule;
+use Symfony\Component\Process\Process;
 
 class ModuleUpdateAction extends AbstractAction
 {
@@ -75,23 +76,32 @@ class ModuleUpdateAction extends AbstractAction
         if (is_array($ids) && $ids[0]) {
             foreach ($ids as $id) {
                 $module = Module::find($id);
-                LaravelModule::update($module->title);
-                $module->current_sha = $module->sha;
-                $module->save();
+                if ($module->url) {
+                    $updatePackage = $this->updatePackage($module);
+                    $output = $this->checkOutdatedPackages();
+                    $success = true;
+                    foreach ($output as $o) {
+                        if ($o->name == $module->url) {
+                            $success = false;
+                        } 
+                    }
+                    if ($success) {
+                        $module->current_sha = $module->sha;
+                        $module->save();
+                    }
+                }                
             }
         } else {
             // Mass Action (all)
+            $output = $this->checkOutdatedPackages();
             $modules = Module::all();
             foreach ($modules as $module) {
-                $url = false;
                 if ($module->url) {
-                    $url = $module->url;
-                }
-                if ($url) {
-                    $responseGH = \Http::get("https://api.github.com/repos/{$url}/commits/master")->collect();
-                    if ($responseGH->count() && $responseGH->get('sha')) {
-                        $module->sha = $responseGH->get('sha');
-                        $module->save();
+                    foreach ($output as $o) {
+                        if ($o->name == $module->url) {
+                            $module->sha = $o->latest;
+                            $module->save();   
+                        } 
                     }
                 }
             }
@@ -102,4 +112,34 @@ class ModuleUpdateAction extends AbstractAction
     private function isUrl($url){
         return preg_match('%^(?:(?:https?|ftp)://)(?:\S+(?::\S*)?@|\d{1,3}(?:\.\d{1,3}){3}|(?:(?:[a-z\d\x{00a1}-\x{ffff}]+-?)*[a-z\d\x{00a1}-\x{ffff}]+)(?:\.(?:[a-z\d\x{00a1}-\x{ffff}]+-?)*[a-z\d\x{00a1}-\x{ffff}]+)*(?:\.[a-z\x{00a1}-\x{ffff}]{2,6}))(?::\d+)?(?:[^\s]*)?$%iu', $url);
     }
+
+    private function checkOutdatedPackages(){
+        $process = Process::fromShellCommandline(sprintf(
+            'cd %s && composer outdated --format=json',
+            base_path()
+        ), null, ['COMPOSER_HOME' => getenv('COMPOSER_HOME')]);
+        $process->run();
+        // executes after the command finishes
+        if (!$process->isSuccessful()) {
+            throw new ProcessFailedException($process);
+        }
+        $output = json_decode($process->getOutput());    
+        return $output->installed;
+    }
+
+    private function updatePackage($module){
+        $process = Process::fromShellCommandline(sprintf(
+            'cd %s && composer update %s',
+            base_path(),
+            $module->url
+        ), null, ['COMPOSER_HOME' => getenv('COMPOSER_HOME')]);
+        $process->run();
+        // executes after the command finishes
+        if (!$process->isSuccessful()) {
+            throw new ProcessFailedException($process);
+        }
+        $output = json_decode($process->getOutput());    
+        return $output;
+    }
+
 }
