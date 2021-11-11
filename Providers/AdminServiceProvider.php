@@ -44,6 +44,7 @@ class AdminServiceProvider extends ServiceProvider
         Voyager::addAction(\Modules\Admin\Http\Actions\Modules\InstallAction::class);
         Voyager::addAction(\Modules\Admin\Http\Actions\Modules\ModuleUpdateAction::class);
         Voyager::addFormField(\Modules\Admin\FormFields\CurrencyFormField::class);
+        Voyager::addFormField(\Modules\Admin\FormFields\JsonFieldsFormField::class);
         $this->registerConfig();
         $this->app->register(RouteServiceProvider::class);
 
