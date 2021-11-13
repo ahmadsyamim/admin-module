@@ -7,6 +7,7 @@ use Modules\Admin\Entities\Module;
 use Illuminate\Support\Str;
 use Nwidart\Modules\Facades\Module as LaravelModule;
 use Symfony\Component\Process\Process;
+use Symfony\Component\Process\Exception\ProcessFailedException;
 
 class ModuleUpdateAction extends AbstractAction
 {
