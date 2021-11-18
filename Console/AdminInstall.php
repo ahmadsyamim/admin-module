@@ -63,6 +63,10 @@ class AdminInstall extends Command
 
             if ($this->is_linux()) {
                 $configs['COMPOSER_HOME'] = exec('which composer'); 
+                $path = explode(DIRECTORY_SEPARATOR,$configs['COMPOSER_HOME']);
+                if (end($path) == 'composer') {
+                    $configs['COMPOSER_HOME'] = str_replace(DIRECTORY_SEPARATOR."composer","",$configs['COMPOSER_HOME']);
+                }
             } else {
                 $arr = array(
                     "which composer",
