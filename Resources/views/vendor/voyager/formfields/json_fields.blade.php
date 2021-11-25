@@ -4,11 +4,11 @@
 </div>
 @foreach (Theme::getSettings() as $name => $value)
 <div class="form-group  col-md-12 ">
-    <label class="control-label" for="theme_setting[{{$name}}]">{{ $name }}</label>
+    <label class="control-label" for="theme_setting[{{$name}}]">{{ ucwords(str_replace('-',' ',$name)) }}</label>
     <br>
     @if (is_array($value))
     @foreach ($value as $n => $v)
-        <label class="control-label" for="theme_setting[{{$n}}]">{{ $n }}</label>
+        <label class="control-label" for="theme_setting[{{$n}}]">{{ ucwords(str_replace('-',' ',$n)) }}</label>
         <br>
         <input type="text" class="form-control" name="theme_setting[{{$n}}]" value="{{ $v }}">
     @endforeach
