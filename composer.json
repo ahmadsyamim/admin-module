@@ -22,7 +22,7 @@
     },
     "require": {
         "tcg/voyager": "^1.5",
-        "pvtl/voyager-frontend": "^1.0",
+        "ahmadsyamim/voyager-frontend": "dev-master",
         "titasgailius/terminal": "^1.0",
         "akaunting/laravel-money": "^1.2"
     },
