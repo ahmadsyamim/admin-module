@@ -120,6 +120,7 @@ class ModuleUpdateAction extends AbstractAction
             'cd %s && composer outdated --format=json',
             base_path()
         ), null, ['COMPOSER_HOME' => getenv('COMPOSER_HOME')]);
+        $process->setTimeout(240);
         $process->run();
         // executes after the command finishes
         if (!$process->isSuccessful()) {
@@ -135,6 +136,7 @@ class ModuleUpdateAction extends AbstractAction
             base_path(),
             $module->url
         ), null, ['COMPOSER_HOME' => getenv('COMPOSER_HOME')]);
+        $process->setTimeout(240);
         $process->run();
         // executes after the command finishes
         if (!$process->isSuccessful()) {
