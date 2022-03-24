@@ -137,7 +137,7 @@ class DataTypesTableSeeder extends Seeder
                 'icon' => NULL,
                 'model_name' => 'Modules\\Admin\\Entities\\Module',
                 'policy_name' => NULL,
-                'controller' => NULL,
+                'controller' => 'Modules\\Admin\\Http\\Controllers\\ModuleController',
                 'description' => NULL,
                 'generate_permissions' => 1,
                 'server_side' => 0,
