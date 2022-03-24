@@ -49,15 +49,15 @@ class ModuleUpdateAction extends AbstractAction
         $type = $actionParams['type'] ?? ['type'=>false];
         if ($type == 'single') {
             return [
-                'class' => 'ui primary button right floated'
+                'class' => 'ui primary button right floated btn-loading'
             ];
         } else if ($type == 'widget') {
             return [
-                'class' => 'ui button item'
+                'class' => 'ui button item btn-loading'
             ];
         }
         return [
-            'class' => 'btn btn-primary',
+            'class' => 'btn btn-primary btn-loading',
         ];
     }
 

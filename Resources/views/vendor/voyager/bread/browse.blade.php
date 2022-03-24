@@ -8,7 +8,7 @@
             <i class="{{ $dataType->icon }}"></i> {{ $dataType->getTranslatedAttribute('display_name_plural') }}
         </h1>
         @can('add', app($dataType->model_name))
-            <a href="{{ route('voyager.'.$dataType->slug.'.create') }}" class="btn btn-success btn-add-new">
+            <a href="{{ route('voyager.'.$dataType->slug.'.create') }}" class="btn btn-success btn-add-new btn-loading">
                 <i class="voyager-plus"></i> <span>{{ __('voyager::generic.add_new') }}</span>
             </a>
         @endcan
@@ -389,5 +389,9 @@
             });
             $('.selected_ids').val(ids);
         });
+
+        $('.btn-loading').on('click', function(event) {
+                $('#voyager-loader').fadeIn()
+            });
     </script>
 @stop

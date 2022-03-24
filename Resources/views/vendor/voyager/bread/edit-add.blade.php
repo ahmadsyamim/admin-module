@@ -227,8 +227,10 @@
             });
             $('[data-toggle="tooltip"]').tooltip();
 
-            $('[type="submit"]').on('click', function(event) {
-                $('#voyager-loader').fadeIn()
+            $('.form-edit-add').submit(function () {
+                if($(this).valid()) {
+                    $('#voyager-loader').fadeIn()
+                }
             });
         });
     </script>
