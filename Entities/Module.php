@@ -10,6 +10,19 @@ class Module extends Model
 {
     public $timestamps = false;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var string[]
+     */
+    protected $fillable = [
+        'title',
+        'url',
+        'description',
+        'slug',
+        'status',
+    ];
+
     protected static function boot()
     {
         parent::boot();
