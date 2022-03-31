@@ -99,6 +99,10 @@ class ModuleUpdateAction extends AbstractAction
             $modules = Module::all();
             foreach ($modules as $module) {
                 if ($module->url) {
+                    // Check if installed
+                    if (!\Composer\InstalledVersions::isInstalled($module->url)) {
+                        \Artisan::call("module:install", ['name' => $module->url]);
+                    }
                     foreach ($output as $o) {
                         if ($o->name == $module->url) {
                             $module->sha = $o->latest;
