@@ -24,6 +24,7 @@
         "tcg/voyager": "^1.5",
         "ahmadsyamim/voyager-frontend": "dev-master",
         "titasgailius/terminal": "^1.0",
+        "akaunting/laravel-language": "^1.0",
         "akaunting/laravel-money": "^1.2"
     },
     "scripts": {
