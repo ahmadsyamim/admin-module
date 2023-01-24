@@ -126,6 +126,8 @@
                                         {{ __('voyager::generic.download') }}
                                     </a>
                                 @endif
+                            @elseif(View::exists('voyager::formfields.read.'.$row->type)) 
+                                @include('voyager::formfields.read.'.$row->type)
                             @else
                                 @include('voyager::multilingual.input-hidden-bread-read')
                                 <p>{{ $dataTypeContent->{$row->field} }}</p>

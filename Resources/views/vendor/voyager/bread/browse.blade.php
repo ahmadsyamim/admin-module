@@ -252,8 +252,15 @@
                                         @endforeach
                                         <td class="no-sort no-click bread-actions">
                                             <div class="ui fluid">
-                                            @foreach($actions as $action)
-                                                    @include('voyager::bread.partials.actions', ['action' => $action, 'actionParams' => ['type' => 'single'] ])
+                                            @foreach($actions as $i=>$action)
+                                            @if(View::exists('voyager::bread.partials.'.str_replace(' ', '', strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', $action->getTitle())))))
+                                                @include('voyager::bread.partials.'.str_replace(' ', '', strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', $action->getTitle()))))
+
+                                            @else
+                                                @include('voyager::bread.partials.actions', ['action' => $action, 'actionParams' => ['type' => 'single'] ])
+                                            @endif 
+
+
                                             @endforeach
                                             </div>
                                         </td>

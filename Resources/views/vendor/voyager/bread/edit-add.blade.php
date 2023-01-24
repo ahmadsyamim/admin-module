@@ -56,6 +56,17 @@
                             @endphp
 
                             @foreach($dataTypeRows as $row)
+                                @php
+                                if (isset($row->details->except)) {
+                                    $skip = false;
+                                    foreach ($row->details->except as $e) {
+                                        if (auth()->user()->hasRole($e)) {
+                                            $skip = true;
+                                        }
+                                    }
+                                    if ($skip) { continue; }
+                                }
+                                @endphp
                                 <!-- GET THE DISPLAY OPTIONS -->
                                 @php
                                     $display_options = $row->details->display ?? NULL;
